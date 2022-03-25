@@ -1,0 +1,59 @@
+Results for the extraLargeArray
+insert 775.678625 ms
+append 2.707417 ms
+
+Results for the largeArray
+insert 9.178292 ms
+append 625.875 μs
+
+Results for the mediumArray
+insert 187.834 μs
+append 139.833 μs
+
+Results for the smallArray
+insert 37.958 μs
+append 81.167 μs
+
+Results for the tinyArray
+insert 27.041 μs
+append 74.792 μs
+
+            xlArr   lArr    mArr    sArr    tArr
+insert:     775.67  9.17    187.83  37.95   27.04
+append:     2.71    625.88  139.83  81.17   74.79
+
+Everything written below is because I didn't notice that the "us" and "ms" were different
+time measurements. So now it makes more sense. So here is my answer and I'll leave the below
+writing for posterity. 
+The append function using the push() method has a time complexity of O(n) because its time
+to execute depends directly on the number of operations being run in a consistent way. Therefore
+as the array gets larger, the amount of time increases equally with the number of operations.
+The insert function using the unshift() method has a time complexity of O(n^2) because not only
+does it increase in time complexity with each operation, it also has to shift all other elements'
+indices at each operation, compounding the operations and drastically increasing the amount of
+time to run through each iteration as the arrays increase. 
+
+
+
+
+These results actually confuse me because they both take longer for each previous operation,
+but then have a drastic drop in runtime on the Large or XLarge arrays. The append function 
+using the push() method is stated multiple places online to have a time complexity of O(1), 
+but since it is operating in a for-loop and executing code for each element, it seems to become
+a O(n) time complexity. This should cause it to consistently increase in time with larger arrays. 
+Why did it take almost no time, however, to run through the largest array? That I don't know 
+and can't find the answer online. 
+The insert function using unshift() method would seem to have a complexity of O(n^2) and
+therefore become drastically less efficient as the arrays grow, yet it is initially much faster
+than the push() method function, and also drops to almost no time to run for the second largest
+array passed in. Additionally, it's largest runtime on the XL array is not much bigger than the 
+push() method's runtime on the L array. This kind of baffles me all-around, given that I would
+have expected the unshift() method function to consistently run slower since it is immediately
+having to run larger numbers of operations to not just add to the array, but also shift the indices
+of all other elements after it. The push() method meanwhile, seems like it ought to consistently
+grow in complexity, which it seems to do until it reaches the XL array.
+So my final thought is that there might be something happening with the variable arrays being 
+created in the first place with a push() in order to then pass into these functions, or there 
+could be some innate javascript limit on operations, at least for push() because suddenly at 
+100,000 elements it took less time to run than for 10 elements. The unshift is still confusing
+since it takes less time to run 10,000 elements than for 100,000 elements.
